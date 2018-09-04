@@ -11,6 +11,7 @@ public class Skull : Character, Reflectable
   protected Timer _rushTimer = new Timer(0);
   protected Timer _flashTimer = new Timer(0);
   protected Timer _soundTimer = new Timer(0);
+  protected int _aggressionLength = 60;
   protected Color _flashAddColor;
   protected Color _flashMultiplyColor;
   protected bool _wasDeflected = false;
@@ -102,9 +103,9 @@ public class Skull : Character, Reflectable
         else
         {
 
-          _idleTimer.Set(300);
+          _idleTimer.Set(_aggressionLength);
           _chargeTimer.Set(25);
-          if (_isAggressive) _rushTimer.Set(180);
+          if (_isAggressive) _rushTimer.Set(_aggressionLength * 2);
           else _rushTimer.Set(0);
           _flashTimer.Set(10);
           foreach (Hitbox hitbox in _hitboxes)
@@ -142,7 +143,7 @@ public class Skull : Character, Reflectable
 
   public void Reflect()
   {
-    health -= 10;
+    health -= 34;
     _moveDirection = -1f * _moveDirection;
     if (_flashAddColor == Color.red)
     {
@@ -159,6 +160,7 @@ public class Skull : Character, Reflectable
   }
   public void Deflect(Vector3 direction)
   {
+    health -= 10;
     _moveDirection = direction.normalized;
     if (_flashAddColor == Color.red)
     {

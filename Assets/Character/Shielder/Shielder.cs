@@ -71,7 +71,7 @@ public class Shielder : Character
         }
         else { 
           if ( stamina <= 0 ) _useShield = false;
-          stamina -= 2.5f;
+          stamina -= 2f;
         }
       }
       else
@@ -80,11 +80,13 @@ public class Shielder : Character
       }
     }
 
+    if ( _useShield ) _isInvincible = true;
+
     if ( _useShield ) {
       currentMoveSpeed = 0.75f;
       _faceDirection = _shield.GetComponent<Shield>().faceDirection;
     } else {
-      if ( stamina < 100 ) stamina = stamina + 1;
+      if ( stamina < 100 ) stamina = stamina + 2;
       
 
     }
@@ -114,6 +116,6 @@ public class Shielder : Character
   {
     _hitstunTimer.Set(10);
     _flashTimer.Set(30);
-    _invincibleTimer.Set(180);
+    _invincibleTimer.Set(30);
   }
 }
