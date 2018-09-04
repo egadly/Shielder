@@ -9,6 +9,7 @@ public class Mage : Character
   public bool _isAggressive = false;
   protected Vector3 _desiredPosition;
   protected Timer _targetTimer = new Timer();
+  protected int _aggressionLength = 60;
 
   protected Timer _fireTimer = new Timer(60);
 
@@ -36,7 +37,7 @@ public class Mage : Character
       {
         _desiredPosition = transform.position + _desiredPosition;
       }
-      _targetTimer.Set( Random.Range(240,360) );
+      _targetTimer.Set( Random.Range(_aggressionLength, (int) (_aggressionLength * 1.5f ) ) );
     }
     else
     {
